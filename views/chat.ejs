@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>FSE Chat room</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css">
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/style.css'>
+    
+</head>
+<body>
+    <div class="wrapper">
+        <div class="body">
+            <div class="chat-messages">
+                <% messages.forEach(message => { %>
+                    <div class="message">
+                        <div class="message-title">
+                            <span class="name"><b>Hakan</b></span>
+                            <small class="pull-right timestamp"><%= message.createdAt %></small>
+                            
+                        </div>
+                        <div class="message-text">
+                            <%= message.message %>
+                        </div>
+                    </div>
+                <% }) %>
+
+            </div>
+            <form class="post-message">
+                <div class="chat-box">
+                    <textarea name="" class="message-data"></textarea>
+                </div>
+                <div class="footer">
+                    <button type="submit" class="btn btn-primary col-xs-offset-5 send-message">POST</button>
+                    <a href="/auth/signout">Log out</a>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</body>
+<script src='/js/jquery.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js'></script>
+<script src='/js/main.js'></script>
+</html>

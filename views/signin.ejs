@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>sign in</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css">
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/sign.css'>
+    
+</head>
+<body>
+    <div class="wrapper">
+        <div class="body col-md-offset-3 col-md-4 ">
+            <% if(typeof type != 'undefined' && type=='error') { %>
+                <div class="alert alert-danger">
+                    <%=message%>
+                </div>
+            <% } %>
+            <% if(typeof type != 'undefined' && type=='success') { %>
+                <div class="alert alert-success">
+                    <%=message%>
+                </div>
+            <% } %>
+            <form action="/auth/signin" method="post">
+                <div class="form-group">
+                    <b>Username</b>
+                    <input type="tex" name="username" class="form-control">
+                </div>
+                <div class="form-group">
+                    <b>Password</b>
+                    <input type="password" name="password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <div>
+                        <button type="submit" class="btn btn-primary pull-right">Sign in</button>
+                        <br>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-6 col-md-offset-3">
+                <br>
+                &nbsp; &nbsp; &nbsp; &nbsp; - OR -
+                <br><br>    
+                <a href="/auth/signup" class="">Create account</a>
+            </div>
+        </div>
+    </div>
+</body>
+<script src='/js/jquery.js'></script>
+<script src='/js/signin.js'></script>
+</html>
