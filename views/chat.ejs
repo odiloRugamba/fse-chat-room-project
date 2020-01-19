@@ -10,14 +10,24 @@
     
 </head>
 <body>
+    <div>
+        <br>
+        <a href="/auth/signout" class="btn btn-danger pull-right">Log out</a> &nbsp; &nbsp; &nbsp;
+        <br>
+    </div>
     <div class="wrapper">
+        
         <div class="body">
+            
             <div class="chat-messages">
                 <% messages.forEach(message => { %>
                     <div class="message">
                         <div class="message-title">
-                            <span class="name"><b>Hakan</b></span>
-                            <small class="pull-right timestamp"><%= message.createdAt %></small>
+                            <span class="name"><b><%= message.user.username %></b></span>
+                            <small class="pull-right timestamp">
+                                <% let time = new Date(message.createdAt); %>
+                                <%= time.getDate() + '.' + (time.getMonth() + 1 ) + '.' + time.getFullYear() +' ' + time.getHours() + ':' + time.getMinutes() %>
+                            </small>
                             
                         </div>
                         <div class="message-text">
@@ -33,7 +43,7 @@
                 </div>
                 <div class="footer">
                     <button type="submit" class="btn btn-primary col-xs-offset-5 send-message">POST</button>
-                    <a href="/auth/signout">Log out</a>
+                    
                 </div>
             </form>
         </div>

@@ -1,12 +1,11 @@
-const message = require('../models/message');
+const Message = require('../models/message');
+const User = require('../models/user');
 const socket = require('../util/socket');
 
-
-const Message = require('../models/message');
 exports.getChat = (req, res, next) => {
-    message.findAll()
+    Message.findAll({include: [User]})
     .then(messages=> {
-        res.render('chat', {messages: messages});
+        res.render('chat', {me: req.user.username, messages: messages});
     })
     .catch(err => {
         console.log(err);
@@ -15,8 +14,8 @@ exports.getChat = (req, res, next) => {
 }
 exports.postMessage = (req, res, next) => {
     const message = req.body.message;
-    Message.create({message: message, userId: req.user.id})
-    socket.getSocket().emit('new-message',{sender: req.user.username, time: Date.now(), message: message})
-
+    Message.create({message: message, userId: req.user.id});
+    let time = new Date();
+    socket.getSocket().emit('new-message',{sender: req.user.username, time:  time.getDate() + '.' + (time.getMonth() + 1 ) + '.' + time.getFullYear() +' ' + time.getHours() + ':' + time.getMinutes(), message: message})
     
 } 

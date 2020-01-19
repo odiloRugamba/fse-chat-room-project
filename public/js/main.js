@@ -2,19 +2,28 @@ $(function(){
     const url = 'http://localhost:3000';
     const socket = io(url);
     
-
     $('.send-message').on('click', e => {
+        e.preventDefault();
         var message = $('.message-data').val();
-        $.post('/send-message', {message: message}).done(()=> {
-            updateChat({sender: 'Me', time: 'now', message: message});  
-            $('.message-data').val("");  
-        });
-             
+        if(message !== ''){
+
+
+            $.ajax({
+                type: "POST",
+                url: "/send-message",
+                data: {message: message},
+                success: result => {
+                    console.log(result);
+                }
+              });
+            $('.message-data').val('');
+        }
+        
         return false;
     });
     socket.on('new-message', message => {
         updateChat(message);
-    })
+    });
     
     const updateChat = (message) => {
         
